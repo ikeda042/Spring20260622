@@ -1,8 +1,10 @@
 package com.example.music.controller;
 
 import com.example.music.entity.Album;
+import com.example.music.entity.Music;
 import com.example.music.form.AlbumForm;
 import com.example.music.service.AlbumService;
+import com.example.music.service.MusicService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +18,11 @@ import java.util.List;
 @RequestMapping("/albums")
 public class AlbumController {
     private final AlbumService albumService;
+    private final MusicService musicService;
 
-    public AlbumController(AlbumService albumService) {
+    public AlbumController(AlbumService albumService, MusicService musicService) {
         this.albumService = albumService;
+        this.musicService = musicService;
     }
 
     @GetMapping
@@ -44,7 +48,9 @@ public class AlbumController {
     @GetMapping("/{albumId}")
     public String album(@PathVariable long albumId, Model model) {
         Album album = albumService.getAlbumById(albumId);
+        List<Music> musics = musicService.getMusicsByAlbumId(albumId);
         model.addAttribute("album", album);
+        model.addAttribute("musics", musics);
         return "album/album-detail";
     }
 
