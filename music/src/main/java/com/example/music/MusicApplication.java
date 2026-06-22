@@ -1,13 +1,13 @@
-package com.example.music_management;
+package com.example.music;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MusicManagementApplication {
+public class MusicApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MusicManagementApplication.class, args);
+        SpringApplication.run(MusicApplication.class, args);
     }
 
 }
