@@ -34,4 +34,11 @@ public class AlbumService {
     public void deleteAlbum(long albumId) {
         albumRepository.deleteAlbum(albumId);
     }
+
+    public void updateAlbum(long albumId, Album album) {
+        if (albumId != album.getAlbumId()) {
+            throw new IllegalArgumentException("Album ID does not match");
+        }
+        albumRepository.updateAlbum(album);
+    }
 }

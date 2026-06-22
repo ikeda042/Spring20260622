@@ -21,6 +21,9 @@
                 <td><span th:text="${album.artist}">album artist</span></td>
                 <td><span th:text="${album.releaseDate}">album releaseDate</span></td>
                 <td>
+                    <form th:action="@{/albums/{albumId}/edit(albumId=${album.albumId})}" method="get">
+                        <button type="submit">編集</button>
+                    </form>
                     <form th:action="@{/albums/{albumId}/delete(albumId=${album.albumId})}" method="post">
                         <button type="submit">削除</button>
                     </form>

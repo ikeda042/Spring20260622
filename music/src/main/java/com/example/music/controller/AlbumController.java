@@ -53,4 +53,18 @@ public class AlbumController {
         albumService.deleteAlbum(albumId);
         return "redirect:/albums";
     }
+
+    @GetMapping("/{albumId}/edit")
+    public String editAlbumForm(@PathVariable long albumId, Model model) {
+        Album album = albumService.getAlbumById(albumId);
+        model.addAttribute("album", album);
+        return "album/album-edit";
+    }
+
+    @PostMapping("/{albumId}/edit")
+    public String updateAlbum(@PathVariable long albumId, Album album) {
+        album.setAlbumId(albumId);
+        albumService.updateAlbum(albumId, album);
+        return "redirect:/albums";
+    }
 }

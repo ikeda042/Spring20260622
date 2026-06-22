@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -24,4 +25,7 @@ public interface AlbumMapper {
 
     @Delete("DELETE FROM albums WHERE album_id = #{albumId}")
     void deleteAlbumById(long albumId);
+
+    @Update("UPDATE albums SET title = #{title}, artist = #{artist}, release_date = #{releaseDate} WHERE album_id = #{albumId}")
+    void updateAlbum(Album album);
 }
