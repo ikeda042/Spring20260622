@@ -9,3 +9,5 @@ $env:MAVEN_OPTS="-Daether.transport.https.securityMode=insecure -Daether.connect
   -f ".\pom.xml" `
   -U spring-boot:run
 '''
+
+２－６－５
