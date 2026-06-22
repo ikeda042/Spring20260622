@@ -32,11 +32,17 @@
             <th>楽曲ID</th>
             <th>タイトル</th>
             <th>再生時間</th>
+            <th></th>
         </tr>
         <tr th:each="music : ${musics}">
             <td><span th:text="${music.musicId}">music id</span></td>
             <td><span th:text="${music.title}">music title</span></td>
             <td><span th:text="${#temporals.format(music.duration, 'HH:mm:ss')}">music duration</span></td>
+            <td>
+                <form th:action="@{/albums/{albumId}/musics/{musicId}/delete(albumId=${album.albumId}, musicId=${music.musicId})}" method="post">
+                    <button type="submit">削除</button>
+                </form>
+            </td>
         </tr>
     </table>
     <a th:href="@{/albums/{albumId}/musics/new(albumId=${album.albumId})}">楽曲を追加</a>

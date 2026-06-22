@@ -27,4 +27,8 @@ public class MusicService {
 
         musicRepository.insertMusic(music);
     }
+
+    public void deleteMusic(long musicId) {
+        musicRepository.deleteMusicById(musicId);
+    }
 }

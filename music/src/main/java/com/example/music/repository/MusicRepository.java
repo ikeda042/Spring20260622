@@ -21,4 +21,8 @@ public class MusicRepository {
     public void insertMusic(Music music) {
         musicMapper.insertMusic(music);
     }
+
+    public void deleteMusicById(long musicId) {
+        musicMapper.deleteMusicById(musicId);
+    }
 }

@@ -90,4 +90,10 @@ public class AlbumController {
         musicService.createMusic(musicForm);
         return "redirect:/albums/" + albumId;
     }
+
+    @PostMapping("/{albumId}/musics/{musicId}/delete")
+    public String deleteMusic(@PathVariable long albumId, @PathVariable long musicId) {
+        musicService.deleteMusic(musicId);
+        return "redirect:/albums/" + albumId;
+    }
 }
