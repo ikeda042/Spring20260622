@@ -3,6 +3,7 @@ package com.example.music.controller;
 import com.example.music.entity.Album;
 import com.example.music.entity.Music;
 import com.example.music.form.AlbumForm;
+import com.example.music.form.MusicForm;
 import com.example.music.service.AlbumService;
 import com.example.music.service.MusicService;
 import org.springframework.stereotype.Controller;
@@ -72,5 +73,21 @@ public class AlbumController {
         album.setAlbumId(albumId);
         albumService.updateAlbum(albumId, album);
         return "redirect:/albums";
+    }
+
+    @GetMapping("/{albumId}/musics/new")
+    public String createMusicForm(@PathVariable long albumId, Model model) {
+        MusicForm musicForm = new MusicForm();
+        musicForm.setAlbumId(albumId);
+        model.addAttribute("musicForm", musicForm);
+
+        return "music/music-form";
+    }
+
+    @PostMapping("/{albumId}/musics/new")
+    public String createMusic(@PathVariable long albumId, MusicForm musicForm) {
+        musicForm.setAlbumId(albumId);
+        musicService.createMusic(musicForm);
+        return "redirect:/albums/" + albumId;
     }
 }

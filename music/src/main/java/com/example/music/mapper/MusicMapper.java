@@ -1,7 +1,9 @@
 package com.example.music.mapper;
 
 import com.example.music.entity.Music;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -11,4 +13,8 @@ public interface MusicMapper {
 
     @Select("SELECT * FROM musics WHERE album_id = #{albumId}")
     List<Music> selectMusicsById(long albumId);
+
+    @Insert("INSERT INTO musics (title, duration, album_id) VALUES (#{title}, #{duration}, #{albumId})")
+    @Options(useGeneratedKeys = true, keyProperty = "musicId")
+    void insertMusic(Music music);
 }
