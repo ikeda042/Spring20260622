@@ -1,6 +1,7 @@
 package com.example.music.service;
 
 import com.example.music.entity.Album;
+import com.example.music.form.AlbumForm;
 import com.example.music.repository.AlbumRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +17,13 @@ public class AlbumService {
 
     public List<Album> getAllAlbums() {
         return albumRepository.getAllAlbums();
+    }
+
+    public void createAlbum(AlbumForm albumForm) {
+        Album album = new Album();
+        album.setTitle(albumForm.getTitle());
+        album.setArtist(albumForm.getArtist());
+        album.setReleaseDate(albumForm.getReleaseDate());
+        albumRepository.insertAlbum(album);
     }
 }

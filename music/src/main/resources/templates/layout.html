@@ -8,6 +8,10 @@
 <div th:fragment="header">
     <header style="background-color: #f8f8f8;">
         <h4>楽曲管理アプリ</h4>
+        <ul>
+            <li><a th:href="@{/albums}">アルバム一覧</a></li>
+            <li><a th:href="@{/albums/new}">アルバム登録</a></li>
+        </ul>
     </header>
 </div>
 
