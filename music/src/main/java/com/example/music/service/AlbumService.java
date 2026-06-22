@@ -26,4 +26,12 @@ public class AlbumService {
         album.setReleaseDate(albumForm.getReleaseDate());
         albumRepository.insertAlbum(album);
     }
+
+    public Album getAlbumById(long albumId) {
+        return albumRepository.getAlbumById(albumId);
+    }
+
+    public void deleteAlbum(long albumId) {
+        albumRepository.deleteAlbum(albumId);
+    }
 }
