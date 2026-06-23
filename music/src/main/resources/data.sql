@@ -8,4 +8,4 @@ INSERT INTO musics (title, duration, album_id) VALUES
     ('Moonlight', '00:04:12', 1),
     ('Eternal Memories', '00:05:45', 2);
 
-INSERT INTO users (username, password) VALUES ('sample', '$2a$08$hBocxV325GV9RKzHR.lHreJr8DsMrkg6vg0kRTbNnBvUFknu67OGC');
+INSERT INTO users (username, password) VALUES ('user', '$2a$10$huFK5JLVWyAXcm4qZlNpge4Lr6r9r4dLbLu7AsMj6Utfk8k4joxTy');
