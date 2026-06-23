@@ -1,7 +1,10 @@
 package com.example.music.service;
 
+import com.example.music.entity.Album;
 import com.example.music.entity.Music;
+import com.example.music.exception.AlbumNotFoundException;
 import com.example.music.form.MusicForm;
+import com.example.music.repository.AlbumRepository;
 import com.example.music.repository.MusicRepository;
 import com.example.music.viewmodel.MusicViewModel;
 import org.springframework.stereotype.Service;
@@ -11,9 +14,11 @@ import java.util.List;
 @Service
 public class MusicService {
     private final MusicRepository musicRepository;
+    private final AlbumRepository albumRepository;
 
-    public MusicService(MusicRepository musicRepository) {
+    public MusicService(MusicRepository musicRepository, AlbumRepository albumRepository) {
         this.musicRepository = musicRepository;
+        this.albumRepository = albumRepository;
     }
 
     public List<Music> getMusicsByAlbumId(long albumId) {
@@ -25,6 +30,11 @@ public class MusicService {
     }
 
     public void createMusic(MusicForm musicForm) {
+        Album existingAlbum = albumRepository.getAlbumById(musicForm.getAlbumId());
+        if (existingAlbum == null) {
+            throw new AlbumNotFoundException("Album not found");
+        }
+
         Music music = new Music();
         music.setTitle(musicForm.getTitle());
         music.setDuration(musicForm.getDuration());

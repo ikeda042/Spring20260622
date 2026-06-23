@@ -3,6 +3,9 @@
 <head th:replace="~{layout :: head('アルバム一覧')}"></head>
 <body>
     <div th:replace="~{layout :: header}"></div>
+    <div>
+        <div th:if="${error}" th:text="${error}" style="color:red">sample message</div>
+    </div>
     <h3>アルバム一覧</h3>
     <table>
         <thead>
