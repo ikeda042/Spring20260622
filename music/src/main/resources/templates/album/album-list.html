@@ -11,6 +11,7 @@
                 <th>タイトル</th>
                 <th>アーティスト</th>
                 <th>リリース日</th>
+                <th>曲数</th>
                 <th></th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
                 <td><a th:href="@{/albums/{albumId}(albumId=${album.albumId})}"><span th:text="${album.title}">album title</span></a></td>
                 <td><span th:text="${album.artist}">album artist</span></td>
                 <td><span th:text="${album.releaseDate}">album releaseDate</span></td>
+                <td><span th:text="${album.musicCount}">album musicCount</span></td>
                 <td>
                     <form th:action="@{/albums/{albumId}/edit(albumId=${album.albumId})}" method="get">
                         <button type="submit">編集</button>

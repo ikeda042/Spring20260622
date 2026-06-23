@@ -6,6 +6,7 @@ import com.example.music.form.AlbumForm;
 import com.example.music.form.MusicForm;
 import com.example.music.service.AlbumService;
 import com.example.music.service.MusicService;
+import com.example.music.viewmodel.AlbumViewModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,7 @@ public class AlbumController {
 
     @GetMapping
     public String albums(Model model) {
-        List<Album> albums = albumService.getAllAlbums();
+        List<AlbumViewModel> albums = albumService.getAllAlbumsWithMusicCount();
         model.addAttribute("albums", albums);
         return "album/album-list";
     }

@@ -3,6 +3,7 @@ package com.example.music.service;
 import com.example.music.entity.Album;
 import com.example.music.form.AlbumForm;
 import com.example.music.repository.AlbumRepository;
+import com.example.music.viewmodel.AlbumViewModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,10 @@ public class AlbumService {
 
     public List<Album> getAllAlbums() {
         return albumRepository.getAllAlbums();
+    }
+
+    public List<AlbumViewModel> getAllAlbumsWithMusicCount() {
+        return albumRepository.getAllAlbumsWithMusicCount();
     }
 
     public void createAlbum(AlbumForm albumForm) {

@@ -1,6 +1,7 @@
 package com.example.music.mapper;
 
 import com.example.music.entity.Album;
+import com.example.music.viewmodel.AlbumViewModel;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -28,4 +29,12 @@ public interface AlbumMapper {
 
     @Update("UPDATE albums SET title = #{title}, artist = #{artist}, release_date = #{releaseDate} WHERE album_id = #{albumId}")
     void updateAlbum(Album album);
+
+    @Select("""
+            SELECT albums.album_id, albums.title, albums.artist, albums.release_date, COUNT(musics.music_id) AS music_count
+            FROM albums
+            LEFT OUTER JOIN musics ON albums.album_id = musics.album_id
+            GROUP BY albums.album_id, albums.title, albums.artist, albums.release_date
+            """)
+    List<AlbumViewModel> selectAllAlbumsWithMusicCount();
 }
