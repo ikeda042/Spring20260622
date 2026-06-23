@@ -7,3 +7,5 @@ INSERT INTO musics (title, duration, album_id) VALUES
     ('Sunset', '00:03:45', 1),
     ('Moonlight', '00:04:12', 1),
     ('Eternal Memories', '00:05:45', 2);
+
+INSERT INTO users (username, password) VALUES ('sample', '$2a$08$hBocxV325GV9RKzHR.lHreJr8DsMrkg6vg0kRTbNnBvUFknu67OGC');
