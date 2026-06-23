@@ -3,6 +3,7 @@
 <head th:replace="~{layout :: head('アルバム詳細')}"></head>
 <body>
     <div th:replace="~{layout :: header}"></div>
+    <div th:if="${message}" th:text="${message}" style="color:blue">sample message</div>
     <h3>アルバム詳細</h3>
     <table>
         <tr>
@@ -29,12 +30,21 @@
     <h3>楽曲一覧</h3>
     <table>
         <tr>
+            <th>お気に入り</th>
             <th>楽曲ID</th>
             <th>タイトル</th>
             <th>再生時間</th>
             <th></th>
         </tr>
         <tr th:each="music : ${musics}">
+            <td>
+                <span th:if="${music.isFavorite}" th:text="'★'">favorite</span>
+                <form th:unless="${music.isFavorite}" th:action="@{/favorites}" method="post">
+                    <input type="hidden" name="musicId" th:value="${music.musicId}">
+                    <input type="hidden" name="albumId" th:value="${album.albumId}">
+                    <button type="submit">お気に入り</button>
+                </form>
+            </td>
             <td><span th:text="${music.musicId}">music id</span></td>
             <td><span th:text="${music.title}">music title</span></td>
             <td><span th:text="${#temporals.format(music.duration, 'HH:mm:ss')}">music duration</span></td>

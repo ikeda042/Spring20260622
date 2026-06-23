@@ -3,6 +3,7 @@ package com.example.music.service;
 import com.example.music.entity.Music;
 import com.example.music.form.MusicForm;
 import com.example.music.repository.MusicRepository;
+import com.example.music.viewmodel.MusicViewModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,10 @@ public class MusicService {
 
     public List<Music> getMusicsByAlbumId(long albumId) {
         return musicRepository.getMusicsByAlbumId(albumId);
+    }
+
+    public List<MusicViewModel> selectMusicsWithFavorite(long albumId, long userId) {
+        return musicRepository.selectMusicsWithFavorite(albumId, userId);
     }
 
     public void createMusic(MusicForm musicForm) {

@@ -4,9 +4,12 @@ import com.example.music.entity.Album;
 import com.example.music.entity.Music;
 import com.example.music.form.AlbumForm;
 import com.example.music.form.MusicForm;
+import com.example.music.security.CustomUserDetails;
 import com.example.music.service.AlbumService;
 import com.example.music.service.MusicService;
 import com.example.music.viewmodel.AlbumViewModel;
+import com.example.music.viewmodel.MusicViewModel;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,9 +51,10 @@ public class AlbumController {
     }
 
     @GetMapping("/{albumId}")
-    public String album(@PathVariable long albumId, Model model) {
+    public String album(@PathVariable long albumId, @AuthenticationPrincipal CustomUserDetails userDetails, Model model) {
         Album album = albumService.getAlbumById(albumId);
-        List<Music> musics = musicService.getMusicsByAlbumId(albumId);
+        long userId = userDetails == null ? 0 : userDetails.getUserId();
+        List<MusicViewModel> musics = musicService.selectMusicsWithFavorite(albumId, userId);
         model.addAttribute("album", album);
         model.addAttribute("musics", musics);
         return "album/album-detail";

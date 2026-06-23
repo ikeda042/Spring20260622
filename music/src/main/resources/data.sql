@@ -9,3 +9,5 @@ INSERT INTO musics (title, duration, album_id) VALUES
     ('Eternal Memories', '00:05:45', 2);
 
 INSERT INTO users (username, password) VALUES ('user', '$2a$10$huFK5JLVWyAXcm4qZlNpge4Lr6r9r4dLbLu7AsMj6Utfk8k4joxTy');
+
+INSERT INTO favorites (user_id, music_id) VALUES (1, 1);

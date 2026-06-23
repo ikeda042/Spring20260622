@@ -1,0 +1,17 @@
+package com.example.music.repository;
+
+import com.example.music.mapper.FavoriteMapper;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class FavoriteRepository {
+    private final FavoriteMapper favoriteMapper;
+
+    public FavoriteRepository(FavoriteMapper favoriteMapper) {
+        this.favoriteMapper = favoriteMapper;
+    }
+
+    public void insertFavorite(long userId, long musicId) {
+        favoriteMapper.insertFavorite(userId, musicId);
+    }
+}
