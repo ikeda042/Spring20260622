@@ -4,6 +4,7 @@
 <body>
     <div th:replace="~{layout :: header}"></div>
     <div th:if="${message}" th:text="${message}" style="color:blue">sample message</div>
+    <div th:if="${error}" th:text="${error}" style="color:red">sample message</div>
     <h3>アルバム詳細</h3>
     <table>
         <tr>

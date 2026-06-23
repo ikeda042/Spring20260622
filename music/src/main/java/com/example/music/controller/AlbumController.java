@@ -111,6 +111,7 @@ public class AlbumController {
 
     @PostMapping("/{albumId}/musics/{musicId}/edit")
     public String updateMusic(@PathVariable long albumId, @PathVariable long musicId, Music music) {
+        music.setAlbumId(albumId);
         musicService.updateMusic(musicId, music);
         return "redirect:/albums/" + albumId;
     }
