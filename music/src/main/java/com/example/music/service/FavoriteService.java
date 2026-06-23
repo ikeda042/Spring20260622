@@ -14,4 +14,8 @@ public class FavoriteService {
     public void insertFavorite(long userId, long musicId) {
         favoriteRepository.insertFavorite(userId, musicId);
     }
+
+    public void deleteFavorite(long userId, long musicId) {
+        favoriteRepository.deleteFavorite(userId, musicId);
+    }
 }

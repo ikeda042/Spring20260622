@@ -14,4 +14,8 @@ public class FavoriteRepository {
     public void insertFavorite(long userId, long musicId) {
         favoriteMapper.insertFavorite(userId, musicId);
     }
+
+    public void deleteFavorite(long userId, long musicId) {
+        favoriteMapper.deleteFavorite(userId, musicId);
+    }
 }

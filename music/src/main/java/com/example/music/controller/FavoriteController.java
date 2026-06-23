@@ -33,4 +33,20 @@ public class FavoriteController {
 
         return "redirect:/albums/" + albumId;
     }
+
+    @PostMapping("/delete")
+    public String deleteFavorite(@RequestParam long musicId,
+                                 @RequestParam long albumId,
+                                 @AuthenticationPrincipal CustomUserDetails userDetails,
+                                 RedirectAttributes redirectAttributes) {
+        if (userDetails == null) {
+            redirectAttributes.addFlashAttribute("message", "ログインしてください");
+            return "redirect:/albums/" + albumId;
+        }
+
+        favoriteService.deleteFavorite(userDetails.getUserId(), musicId);
+        redirectAttributes.addFlashAttribute("message", "お気に入りを解除しました");
+
+        return "redirect:/albums/" + albumId;
+    }
 }
