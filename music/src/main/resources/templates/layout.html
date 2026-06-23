@@ -11,6 +11,11 @@
         <ul>
             <li><a th:href="@{/albums}">アルバム一覧</a></li>
             <li><a th:href="@{/albums/new}">アルバム登録</a></li>
+            <li>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit">ログアウト</button>
+                </form>
+            </li>
         </ul>
     </header>
 </div>
