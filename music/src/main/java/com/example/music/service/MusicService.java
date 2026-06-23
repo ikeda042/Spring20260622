@@ -31,4 +31,16 @@ public class MusicService {
     public void deleteMusic(long musicId) {
         musicRepository.deleteMusicById(musicId);
     }
+
+    public Music getMusicById(long musicId) {
+        return musicRepository.selectMusicById(musicId);
+    }
+
+    public void updateMusic(long musicId, Music music) {
+        if (musicId != music.getMusicId()) {
+            throw new IllegalArgumentException("Music ID does not match");
+        }
+
+        musicRepository.updateMusic(music);
+    }
 }

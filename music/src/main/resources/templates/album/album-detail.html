@@ -39,6 +39,9 @@
             <td><span th:text="${music.title}">music title</span></td>
             <td><span th:text="${#temporals.format(music.duration, 'HH:mm:ss')}">music duration</span></td>
             <td>
+                <form th:action="@{/albums/{albumId}/musics/{musicId}/edit(albumId=${album.albumId}, musicId=${music.musicId})}" method="get">
+                    <button type="submit">編集</button>
+                </form>
                 <form th:action="@{/albums/{albumId}/musics/{musicId}/delete(albumId=${album.albumId}, musicId=${music.musicId})}" method="post">
                     <button type="submit">削除</button>
                 </form>

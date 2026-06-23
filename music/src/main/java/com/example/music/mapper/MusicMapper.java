@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -21,4 +22,10 @@ public interface MusicMapper {
 
     @Delete("DELETE FROM musics WHERE music_id = #{musicId}")
     void deleteMusicById(long musicId);
+
+    @Update("UPDATE musics SET title = #{title}, duration = #{duration} WHERE music_id = #{musicId}")
+    void updateMusic(Music music);
+
+    @Select("SELECT * FROM musics WHERE music_id = #{musicId}")
+    Music selectMusicById(long musicId);
 }

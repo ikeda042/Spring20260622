@@ -25,4 +25,12 @@ public class MusicRepository {
     public void deleteMusicById(long musicId) {
         musicMapper.deleteMusicById(musicId);
     }
+
+    public void updateMusic(Music music) {
+        musicMapper.updateMusic(music);
+    }
+
+    public Music selectMusicById(long musicId) {
+        return musicMapper.selectMusicById(musicId);
+    }
 }

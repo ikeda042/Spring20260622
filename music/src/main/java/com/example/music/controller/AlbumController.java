@@ -96,4 +96,17 @@ public class AlbumController {
         musicService.deleteMusic(musicId);
         return "redirect:/albums/" + albumId;
     }
+
+    @GetMapping("/{albumId}/musics/{musicId}/edit")
+    public String editMusic(@PathVariable long albumId, @PathVariable long musicId, Model model) {
+        Music music = musicService.getMusicById(musicId);
+        model.addAttribute("music", music);
+        return "music/music-edit";
+    }
+
+    @PostMapping("/{albumId}/musics/{musicId}/edit")
+    public String updateMusic(@PathVariable long albumId, @PathVariable long musicId, Music music) {
+        musicService.updateMusic(musicId, music);
+        return "redirect:/albums/" + albumId;
+    }
 }
