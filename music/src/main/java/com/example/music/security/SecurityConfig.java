@@ -1,5 +1,6 @@
 package com.example.music.security;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,8 +19,8 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/register", "/login", "/error").permitAll()
-                        .anyRequest().permitAll()
-                        // .anyRequest().authenticated()
+                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                        .anyRequest().authenticated()
                 )
                 // Spring Security 4以降はデフォルトでCSRFが有効だが、明示的に有効にする。
                 .csrf(csrf -> csrf.csrfTokenRepository(new HttpSessionCsrfTokenRepository()))

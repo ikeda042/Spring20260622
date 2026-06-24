@@ -26,16 +26,19 @@
                 <td><span th:text="${album.releaseDate}">album releaseDate</span></td>
                 <td><span th:text="${album.musicCount}">album musicCount</span></td>
                 <td>
-                    <form th:action="@{/albums/{albumId}/edit(albumId=${album.albumId})}" method="get">
-                        <button type="submit">編集</button>
-                    </form>
-                    <form th:action="@{/albums/{albumId}/delete(albumId=${album.albumId})}" method="post">
-                        <button type="submit">削除</button>
-                    </form>
+                    <div class="d-flex">
+                        <form th:action="@{/albums/{albumId}/edit(albumId=${album.albumId})}" method="get">
+                            <button type="submit" class="btn btn-warning btn-sm mx-2">編集</button>
+                        </form>
+                        <form th:action="@{/albums/{albumId}/delete(albumId=${album.albumId})}" method="post" class="delete-form">
+                            <button type="submit" class="btn btn-danger btn-sm mx-2">削除</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         </tbody>
     </table>
     <div th:replace="~{layout :: footer}"></div>
+    <script src="/js/delete-form.js"></script>
 </body>
 </html>

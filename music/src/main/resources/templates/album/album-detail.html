@@ -3,69 +3,78 @@
 <head th:replace="~{layout :: head('アルバム詳細')}"></head>
 <body>
     <div th:replace="~{layout :: header}"></div>
-    <div th:if="${message}" th:text="${message}" style="color:blue">sample message</div>
-    <div th:if="${error}" th:text="${error}" style="color:red">sample message</div>
-    <h3>アルバム詳細</h3>
-    <table>
+    <div class="w-50 mx-auto mt-4">
+        <div th:if="${message}" th:text="${message}" class="alert alert-info">sample message</div>
+        <div th:if="${error}" th:text="${error}" class="alert alert-danger">sample message</div>
+    </div>
+    <h3 class="text-center">アルバム詳細</h3>
+    <table class="table table-bordered w-50 mx-auto shadow">
         <tr>
-            <th>アルバムID</th>
+            <th class="table-light">アルバムID</th>
             <td th:text="${album.albumId}"></td>
         </tr>
         <tr>
-            <th>タイトル</th>
+            <th class="table-light">タイトル</th>
             <td th:text="${album.title}"></td>
         </tr>
         <tr>
-            <th>アーティスト</th>
+            <th class="table-light">アーティスト</th>
             <td th:text="${album.artist}"></td>
         </tr>
         <tr>
-            <th>リリース日</th>
+            <th class="table-light">リリース日</th>
             <td th:text="${album.releaseDate}"></td>
         </tr>
         <tr>
-            <th>作成日時</th>
+            <th class="table-light">作成日時</th>
             <td th:text="${#temporals.format(album.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
     </table>
-    <h3>楽曲一覧</h3>
-    <table>
-        <tr>
-            <th>お気に入り</th>
-            <th>楽曲ID</th>
-            <th>タイトル</th>
-            <th>再生時間</th>
-            <th></th>
-        </tr>
-        <tr th:each="music : ${musics}">
-            <td>
-                <span th:text="${music.isFavorite ? '★' : ''}">☆</span>
-                <form th:if="${music.isFavorite}" th:action="@{/favorites/delete}" method="post">
-                    <input type="hidden" name="musicId" th:value="${music.musicId}">
-                    <input type="hidden" name="albumId" th:value="${album.albumId}">
-                    <button type="submit">お気に入り解除</button>
-                </form>
-                <form th:unless="${music.isFavorite}" th:action="@{/favorites}" method="post">
-                    <input type="hidden" name="musicId" th:value="${music.musicId}">
-                    <input type="hidden" name="albumId" th:value="${album.albumId}">
-                    <button type="submit">お気に入り</button>
-                </form>
-            </td>
-            <td><span th:text="${music.musicId}">music id</span></td>
-            <td><span th:text="${music.title}">music title</span></td>
-            <td><span th:text="${#temporals.format(music.duration, 'HH:mm:ss')}">music duration</span></td>
-            <td>
-                <form th:action="@{/albums/{albumId}/musics/{musicId}/edit(albumId=${album.albumId}, musicId=${music.musicId})}" method="get">
-                    <button type="submit">編集</button>
-                </form>
-                <form th:action="@{/albums/{albumId}/musics/{musicId}/delete(albumId=${album.albumId}, musicId=${music.musicId})}" method="post">
-                    <button type="submit">削除</button>
-                </form>
-            </td>
-        </tr>
+    <h3 class="text-center">楽曲一覧</h3>
+    <table class="table table-striped table-bordered w-75 mx-auto shadow">
+        <thead class="table-light">
+            <tr>
+                <th>お気に入り</th>
+                <th>楽曲ID</th>
+                <th>タイトル</th>
+                <th>再生時間</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="music : ${musics}">
+                <td><span th:text="${music.isFavorite ? '★' : ''}">☆</span></td>
+                <td><span th:text="${music.musicId}">music id</span></td>
+                <td><span th:text="${music.title}">music title</span></td>
+                <td><span th:text="${#temporals.format(music.duration, 'HH:mm:ss')}">music duration</span></td>
+                <td>
+                    <div class="d-flex">
+                        <form th:action="@{/albums/{albumId}/musics/{musicId}/edit(albumId=${album.albumId}, musicId=${music.musicId})}" method="get">
+                            <button type="submit" class="btn btn-warning btn-sm mx-2">編集</button>
+                        </form>
+                        <form th:action="@{/albums/{albumId}/musics/{musicId}/delete(albumId=${album.albumId}, musicId=${music.musicId})}" method="post" class="delete-form">
+                            <button type="submit" class="btn btn-danger btn-sm mx-2">削除</button>
+                        </form>
+                        <form th:if="${music.isFavorite}" th:action="@{/favorites/delete}" method="post">
+                            <input type="hidden" name="musicId" th:value="${music.musicId}">
+                            <input type="hidden" name="albumId" th:value="${album.albumId}">
+                            <button type="submit" class="btn btn-danger btn-sm mx-2">お気に入り解除</button>
+                        </form>
+                        <form th:unless="${music.isFavorite}" th:action="@{/favorites}" method="post">
+                            <input type="hidden" name="musicId" th:value="${music.musicId}">
+                            <input type="hidden" name="albumId" th:value="${album.albumId}">
+                            <button type="submit" class="btn btn-primary btn-sm mx-2">お気に入り</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
     </table>
-    <a th:href="@{/albums/{albumId}/musics/new(albumId=${album.albumId})}">楽曲を追加</a>
-    <a href="/albums">一覧に戻る</a>
+    <div class="d-flex justify-content-center gap-3">
+        <a th:href="@{/albums/{albumId}/musics/new(albumId=${album.albumId})}" class="btn btn-primary mt-3 w-25">楽曲を追加</a>
+        <a href="/albums" class="btn btn-secondary mt-3 w-25">一覧に戻る</a>
+    </div>
     <div th:replace="~{layout :: footer}"></div>
+    <script src="/js/delete-form.js"></script>
 </body>
 </html>

@@ -1,0 +1,7 @@
+h3 {
+    margin: 30px 0 14px;
+}
+
+h3:first-of-type {
+    margin: 24px 0 14px;
+}
