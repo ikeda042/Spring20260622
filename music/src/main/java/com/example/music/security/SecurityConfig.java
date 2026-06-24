@@ -3,11 +3,14 @@ package com.example.music.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
@@ -18,6 +21,8 @@ public class SecurityConfig {
                         .anyRequest().permitAll()
                         // .anyRequest().authenticated()
                 )
+                // Spring Security 4以降はデフォルトでCSRFが有効だが、明示的に有効にする。
+                .csrf(csrf -> csrf.csrfTokenRepository(new HttpSessionCsrfTokenRepository()))
                 .formLogin(login -> login
                         .loginProcessingUrl("/login")
                         .loginPage("/login")
