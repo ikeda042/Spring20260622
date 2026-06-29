@@ -1,5 +1,5 @@
 # Album Delete Sequence
-
+t
 ```mermaid
 sequenceDiagram
     autonumber
